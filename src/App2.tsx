@@ -22,9 +22,10 @@ import '@ionic/react/css/display.css';
 import '@ionic/react/css/palettes/dark.system.css';
 
 import './theme/variables.css';
-import { ItemList } from './todo';
-import { ItemProvider } from './todo/ItemProvider';
-import ItemEdit from './todo/ItemEdit';
+import { ItemList } from './masini';
+import { ItemProvider } from './masini/MasinaProvider';
+import MasinaEdit from './masini/MasinaEdit';
+
 
 setupIonicReact();
 
@@ -33,10 +34,10 @@ const App: React.FC = () => (
     <ItemProvider>
       <IonReactRouter>
         <IonRouterOutlet>
-          <Route path="/items" component={ItemList} exact={true}/>
-          <Route path="/item" component={ItemEdit} exact={true}/>
-          <Route path="/item/:id" component={ItemEdit} exact={true}/>
-          <Route exact path="/" render={() => <Redirect to="/items"/>}/>
+          <Route path="/masini" component={ItemList} exact={true}/>
+          <Route path="/masina" component={MasinaEdit} exact={true}/>
+          <Route path="/masina/:id" component={MasinaEdit} exact={true}/>
+          <Route exact path="/" render={() => <Redirect to="/masini"/>}/>
         </IonRouterOutlet>
       </IonReactRouter>
     </ItemProvider>
