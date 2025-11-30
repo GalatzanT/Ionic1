@@ -134,7 +134,7 @@ const createMasina = async (ctx) => {
   masini.push(m);
   ctx.response.body = m;
   ctx.response.status = 201;
-  broadcast({ event: 'masinaCreated', payload: { masina: m } });
+  broadcast({ event: 'created', payload: { item: m } });  // CHANGED
 };
 
 router.post('/masini', async (ctx) => {
@@ -177,7 +177,7 @@ router.put('/masini/:id', async (ctx) => {
   lastUpdated = new Date();
   ctx.response.body = m;
   ctx.response.status = 200;
-  broadcast({ event: 'masinaUpdated', payload: { masina: m } });
+  broadcast({ event: 'updated', payload: { item: m } });  // CHANGED
 });
 
 /**
@@ -190,7 +190,7 @@ router.del('/masini/:id', ctx => {
     const masina = masini[index];
     masini.splice(index, 1);
     lastUpdated = new Date();
-    broadcast({ event: 'masinaDeleted', payload: { masina } });
+    broadcast({ event: 'deleted', payload: { item: masina } });  // CHANGED
   }
   ctx.response.status = 204;
 });
@@ -198,7 +198,7 @@ router.del('/masini/:id', ctx => {
 /**
  * periodic generator: adaugă o masina nouă la fiecare 5s
  * (utile pentru demo WS)
- */
+ 
 setInterval(() => {
   lastUpdated = new Date();
   lastId = `${parseInt(lastId) + 1}`;
@@ -214,8 +214,9 @@ setInterval(() => {
   });
   masini.push(masina);
   console.log(`New masina: ${masina.marca} ${masina.model} (${masina.id})`);
-  broadcast({ event: 'masinaCreated', payload: { masina } });
-}, 5000);
+  broadcast({ event: 'created', payload: { item: masina } });  // CHANGED
+}, 105000);
+*/
 
 app.use(router.routes());
 app.use(router.allowedMethods());
